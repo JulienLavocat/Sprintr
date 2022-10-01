@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Card } from '../../../../shared/models/card.model';
 
 @Component({
@@ -12,26 +12,20 @@ export class ArchivesComponent {
   columns$: Observable<string[]>;
 
   constructor() {
-    this.columnsContent$ = new Observable((subscriber) => {
-      subscriber.next({
-        'Sprint #1 - 14/09/2022': [
-          {
-            id: '1234',
-            title: 'Start working on Sprintr',
-            content: 'Started working on Sprintr',
-            type: 'story',
-            scoreType: 'story',
-            score: '1',
-          },
-        ],
-      });
-      subscriber.complete();
+    this.columnsContent$ = of({
+      'Sprint #1 - 14/09/2022': [
+        {
+          id: '1234',
+          title: 'Start working on Sprintr',
+          content: 'Started working on Sprintr',
+          type: 'story',
+          scoreType: 'story',
+          score: '1',
+        },
+      ],
     });
 
-    this.columns$ = new Observable((subscriber) => {
-      subscriber.next(['Sprint #1 - 14/09/2022']);
-      subscriber.complete();
-    });
+    this.columns$ = of(['Sprint #1 - 14/09/2022']);
   }
 
   loadArchives() {}
