@@ -10,6 +10,9 @@ import { MatListModule } from '@angular/material/list';
 import { ProjectNavbarComponent } from './components/project-navbar/project-navbar.component';
 import { SprintComponent } from './components/sprint/sprint.component';
 import { RouterModule } from '@angular/router';
+import { BoardComponent } from './components/board/board.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CardComponent } from './components/board/card/card.component';
 
 @NgModule({
   imports: [
@@ -21,7 +24,14 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     MatListModule,
     RouterModule,
+    DragDropModule,
   ],
-  declarations: [ProjectComponent, ProjectNavbarComponent, SprintComponent],
+  declarations: [
+    ProjectComponent,
+    ProjectNavbarComponent,
+    SprintComponent,
+    BoardComponent,
+    CardComponent,
+  ],
 })
 export class ProjectModule {}

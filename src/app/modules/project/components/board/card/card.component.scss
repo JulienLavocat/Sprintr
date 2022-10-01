@@ -1,0 +1,37 @@
+.board-card {
+  background-color: white;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  border-radius: 0.375rem;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  .card-bg {
+    height: 32px;
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+  }
+
+  .card-body {
+    padding: 0.5rem;
+  }
+
+  .title {
+    margin-bottom: 0.3rem;
+  }
+
+  .work-align {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    .icon {
+      width: 0.9rem;
+      height: 0.9rem;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
