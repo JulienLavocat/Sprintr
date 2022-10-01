@@ -15,6 +15,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CardComponent } from './components/board/card/card.component';
 import { BoardActionsComponent } from './components/board-actions/board-actions.component';
 import { BacklogComponent } from './views/backlog/backlog.component';
+import { ArchivesComponent } from './views/archives/archives.component';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { BacklogComponent } from './views/backlog/backlog.component';
     CardComponent,
     BoardActionsComponent,
     BacklogComponent,
+    ArchivesComponent,
   ],
 })
 export class ProjectModule {}
