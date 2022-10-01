@@ -1,0 +1,14 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport opened mode="side">
+    <mat-toolbar>{{project?.name}}</mat-toolbar>
+    <mat-nav-list>
+
+      <a mat-list-item [href]="'/projects/' + project?.id + '/backlog'">Backlog</a>
+      <a mat-list-item [href]="'/projects/' + project?.id + '/'">Sprint</a>
+      <a mat-list-item [href]="'/projects/' + project?.id + '/archives'">Archives</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
