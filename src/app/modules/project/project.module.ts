@@ -8,11 +8,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { ProjectNavbarComponent } from './components/project-navbar/project-navbar.component';
-import { SprintComponent } from './components/sprint/sprint.component';
+import { SprintComponent } from './views/sprint/sprint.component';
 import { RouterModule } from '@angular/router';
 import { BoardComponent } from './components/board/board.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CardComponent } from './components/board/card/card.component';
+import { BoardActionsComponent } from './components/board-actions/board-actions.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { CardComponent } from './components/board/card/card.component';
     SprintComponent,
     BoardComponent,
     CardComponent,
+    BoardActionsComponent,
   ],
 })
 export class ProjectModule {}

@@ -1,7 +1,7 @@
 <li class="board-card" cdkDrag>
-  <span style="background-color: navy;" class="card-bg"></span>
+  <span [style]="'background-color: ' + color" class="card-bg"></span>
   <div class="card-body">
-    <h3 class="title">[{{card.type}}] {{card.title}}</h3>
+    <h3 class="title">[{{card.type | titlecase}}] {{card.title}}</h3>
     <div class="work-align">
       <img class="icon"
         src="https://jira-align-powerup.ap-southeast-2.dev.public.atl-paas.net/JA_144x144.png?color=6b778c" />

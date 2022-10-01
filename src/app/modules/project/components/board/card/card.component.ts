@@ -8,6 +8,9 @@ import { Card } from '../../../../../shared/models/card.model';
 })
 export class CardComponent {
   @Input() card!: Card;
+  color: string;
 
-  constructor() {}
+  constructor() {
+    this.color = 'navy';
+  }
 }
