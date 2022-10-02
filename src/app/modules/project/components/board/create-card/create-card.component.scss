@@ -1,0 +1,15 @@
+.card-form {
+  display: flex;
+  flex-direction: column;
+
+  .form-row {
+    display: flex;
+    gap: 1rem;
+  }
+
+  button {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

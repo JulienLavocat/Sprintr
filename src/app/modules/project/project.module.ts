@@ -5,8 +5,12 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { ProjectNavbarComponent } from './components/project-navbar/project-navbar.component';
 import { SprintComponent } from './views/sprint/sprint.component';
 import { RouterModule } from '@angular/router';
@@ -16,6 +20,8 @@ import { CardComponent } from './components/board/card/card.component';
 import { BoardActionsComponent } from './components/board-actions/board-actions.component';
 import { BacklogComponent } from './views/backlog/backlog.component';
 import { ArchivesComponent } from './views/archives/archives.component';
+import { CreateCardComponent } from './components/board/create-card/create-card.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -26,6 +32,11 @@ import { ArchivesComponent } from './views/archives/archives.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatDialogModule,
+    ReactiveFormsModule,
     RouterModule,
     DragDropModule,
   ],
@@ -38,6 +49,7 @@ import { ArchivesComponent } from './views/archives/archives.component';
     BoardActionsComponent,
     BacklogComponent,
     ArchivesComponent,
+    CreateCardComponent,
   ],
 })
 export class ProjectModule {}

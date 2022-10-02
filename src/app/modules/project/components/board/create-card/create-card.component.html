@@ -1,0 +1,46 @@
+<form [formGroup]="form" class="card-form" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Content</mat-label>
+    <textarea matInput formControlName="content" rows="5"></textarea>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Type</mat-label>
+    <mat-select formControlName="type">
+      <mat-option value="sprint_objective">Sprint's objective</mat-option>
+      <mat-option value="story">Story</mat-option>
+      <mat-option value="bug">Bug</mat-option>
+      <mat-option value="investigation">Investigation</mat-option>
+      <mat-option value="debt">Debt</mat-option>
+      <mat-option value="support">Support</mat-option>
+      <mat-option value="marketing">Marketing</mat-option>
+      <mat-option value="misc">Misc</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="form-row">
+    <mat-form-field appearance="fill">
+      <mat-label>Work type</mat-label>
+      <mat-select formControlName="scoreType">
+        <mat-option value="feature">Feature</mat-option>
+        <mat-option value="story">Story</mat-option>
+        <mat-option value="defect">Defect</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Score</mat-label>
+      <mat-select formControlName="score">
+        <mat-option value="unscored">Unscored</mat-option>
+        <mat-option value="1">1</mat-option>
+        <mat-option value="2">2</mat-option>
+        <mat-option value="3">3</mat-option>
+        <mat-option value="5">5</mat-option>
+        <mat-option value="8">8</mat-option>
+        <mat-option value="13+">13+</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary" type="submit">Create card</button>
+</form>
