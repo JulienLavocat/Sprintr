@@ -20,6 +20,8 @@ export class CreateCardComponent {
   constructor(private fb: FormBuilder, private dialog: MatDialogRef<Card>) {}
 
   onSubmit() {
+    if (this.form.invalid) return;
+
     const values = this.form.value;
 
     this.dialog.close({

@@ -42,5 +42,5 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <button mat-raised-button color="primary" type="submit">Create card</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Create card</button>
 </form>
