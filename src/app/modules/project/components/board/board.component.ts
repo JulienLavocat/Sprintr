@@ -28,8 +28,6 @@ export class BoardComponent {
     });
   }
 
-  onCardCreated(card: Card) {}
-
   drop(event: CdkDragDrop<any>) {
     if (!this.columnsContent) return;
 

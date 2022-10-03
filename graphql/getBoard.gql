@@ -1,0 +1,18 @@
+query GetBoard($projectId: String!, $name: String!) {
+  getBoard(projectId: $projectId, name: $name) {
+    id
+    name
+    columns {
+      id
+      name
+      cards {
+        id
+        content
+        score
+        title
+        type
+        scoreType
+      }
+    }
+  }
+}
