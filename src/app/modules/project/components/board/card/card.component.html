@@ -1,4 +1,4 @@
-<li class="board-card" cdkDrag>
+<li class="board-card" cdkDrag (contextmenu)="openContextMenu($event)">
   <span [style]="'background-color: ' + color" class="card-bg"></span>
   <div class="card-body">
     <h3 class="title">[{{type}}] {{card.title}}</h3>
@@ -9,3 +9,11 @@
     </div>
   </div>
 </li>
+
+<ng-template #cardContextMenu>
+  <div class="board-card-actions">
+    <mat-action-list>
+      <button mat-list-item (click)="onDeleteCard()">Delete card</button>
+    </mat-action-list>
+  </div>
+</ng-template>

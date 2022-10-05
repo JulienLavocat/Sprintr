@@ -1,0 +1,19 @@
+mutation createCard(
+  $columnId: String!
+  $title: String!
+  $content: String!
+  $type: String!
+  $score: String!
+  $scoreType: String!
+) {
+  createCard(
+    columnId: $columnId
+    title: $title
+    content: $content
+    type: $type
+    score: $score
+    scoreType: $scoreType
+  ) {
+    id
+  }
+}

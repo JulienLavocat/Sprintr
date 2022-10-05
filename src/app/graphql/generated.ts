@@ -41,9 +41,21 @@ export type Card = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createCard: Card;
   createColumn: BoardColumn;
   createProject: Project;
+  deleteCard: Card;
   deleteColumn: BoardColumn;
+};
+
+
+export type MutationCreateCardArgs = {
+  columnId: Scalars['String'];
+  content: Scalars['String'];
+  score: Scalars['String'];
+  scoreType: Scalars['String'];
+  title: Scalars['String'];
+  type: Scalars['String'];
 };
 
 
@@ -56,6 +68,11 @@ export type MutationCreateColumnArgs = {
 
 export type MutationCreateProjectArgs = {
   name: Scalars['String'];
+};
+
+
+export type MutationDeleteCardArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -88,6 +105,18 @@ export type QueryGetProjectArgs = {
   id: Scalars['String'];
 };
 
+export type CreateCardMutationVariables = Exact<{
+  columnId: Scalars['String'];
+  title: Scalars['String'];
+  content: Scalars['String'];
+  type: Scalars['String'];
+  score: Scalars['String'];
+  scoreType: Scalars['String'];
+}>;
+
+
+export type CreateCardMutation = { __typename?: 'Mutation', createCard: { __typename?: 'Card', id: string } };
+
 export type CreateColumnMutationVariables = Exact<{
   projectId: Scalars['String'];
   boardId: Scalars['String'];
@@ -96,6 +125,13 @@ export type CreateColumnMutationVariables = Exact<{
 
 
 export type CreateColumnMutation = { __typename?: 'Mutation', createColumn: { __typename?: 'BoardColumn', id: string } };
+
+export type DeleteCardMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type DeleteCardMutation = { __typename?: 'Mutation', deleteCard: { __typename?: 'Card', id: string } };
 
 export type DeleteColumnMutationVariables = Exact<{
   columnId: Scalars['String'];
@@ -119,6 +155,31 @@ export type GetprojecQueryVariables = Exact<{
 
 export type GetprojecQuery = { __typename?: 'Query', getProject: { __typename?: 'Project', id: string, name: string } };
 
+export const CreateCardDocument = gql`
+    mutation createCard($columnId: String!, $title: String!, $content: String!, $type: String!, $score: String!, $scoreType: String!) {
+  createCard(
+    columnId: $columnId
+    title: $title
+    content: $content
+    type: $type
+    score: $score
+    scoreType: $scoreType
+  ) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateCardGQL extends Apollo.Mutation<CreateCardMutation, CreateCardMutationVariables> {
+    document = CreateCardDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const CreateColumnDocument = gql`
     mutation CreateColumn($projectId: String!, $boardId: String!, $name: String!) {
   createColumn(projectId: $projectId, boardId: $boardId, name: $name) {
@@ -132,6 +193,24 @@ export const CreateColumnDocument = gql`
   })
   export class CreateColumnGQL extends Apollo.Mutation<CreateColumnMutation, CreateColumnMutationVariables> {
     document = CreateColumnDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteCardDocument = gql`
+    mutation deleteCard($id: String!) {
+  deleteCard(id: $id) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteCardGQL extends Apollo.Mutation<DeleteCardMutation, DeleteCardMutationVariables> {
+    document = DeleteCardDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

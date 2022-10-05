@@ -1,12 +1,11 @@
-<ul class="board-col" cdkDropList (cdkDropListDropped)="onDrop.emit($event)" [cdkDropListData]="column.id"
-  (contextmenu)="openContextMenu($event)">
-  <div class="title">
+<ul class="board-col" cdkDropList (cdkDropListDropped)="onDrop.emit($event)" [cdkDropListData]="column.id">
+  <div class="title" (contextmenu)="openContextMenu($event)">
     <h2>{{column.name}}</h2>
-    <button mat-icon-button class="add-card" (click)="onCreateCard.emit(column.id)">
+    <button mat-icon-button class="add-card" (click)="openCreateCardDialog()">
       <mat-icon fontIcon="add"></mat-icon>
     </button>
   </div>
-  <app-card *ngFor="let card of column.cards" [card]="card"></app-card>
+  <app-card *ngFor="let card of column.cards" [card]="card" (refreshBoard)="refreshBoard.emit()"></app-card>
 </ul>
 
 <ng-template #columnContextMenu>

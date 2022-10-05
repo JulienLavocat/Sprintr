@@ -10,9 +10,15 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatDialog } from '@angular/material/dialog';
 import { filter, fromEvent, Subscription, take } from 'rxjs';
-import { BoardColumn, DeleteColumnGQL } from '../../../../../graphql/generated';
+import {
+  BoardColumn,
+  Card,
+  CreateCardGQL,
+  DeleteColumnGQL,
+} from '../../../../../graphql/generated';
+import { CreateCardComponent } from '../create-card/create-card.component';
 
 @Component({
   selector: 'app-column',
@@ -21,13 +27,11 @@ import { BoardColumn, DeleteColumnGQL } from '../../../../../graphql/generated';
 })
 export class ColumnComponent {
   @Output() onDrop = new EventEmitter<CdkDragDrop<any, any, any>>();
-  @Output() onCreateCard = new EventEmitter<string>();
   @Output() refreshBoard = new EventEmitter<void>();
 
   @Input() column!: BoardColumn;
 
   @ViewChild('columnContextMenu') contextMenu!: TemplateRef<any>;
-  @ViewChild(MatMenuTrigger) contextMenuTrigger!: MatMenuTrigger;
 
   overlayRef: OverlayRef | null = null;
   closeSubscription?: Subscription;
@@ -35,7 +39,9 @@ export class ColumnComponent {
   constructor(
     public overlay: Overlay,
     public viewContainerRef: ViewContainerRef,
-    private deleteColumn: DeleteColumnGQL
+    private deleteColumn: DeleteColumnGQL,
+    private createCard: CreateCardGQL,
+    private dialog: MatDialog
   ) {}
 
   /**
@@ -89,6 +95,24 @@ export class ColumnComponent {
     if (!this.overlayRef) return;
     this.overlayRef.dispose();
     this.overlayRef = null;
+  }
+
+  openCreateCardDialog() {
+    const dialogRef = this.dialog.open<CreateCardComponent, any, Card>(
+      CreateCardComponent,
+      {}
+    );
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) return;
+
+      this.createCard
+        .mutate({
+          ...result,
+          columnId: this.column.id,
+        })
+        .subscribe(() => this.refreshBoard.emit());
+    });
   }
 
   onDelete() {

@@ -2,6 +2,6 @@
   (refreshBoard)="refetchBoard()">
 </app-board-actions>
 <div class="board" cdkDropListGroup>
-  <app-column *ngFor="let column of columns" [column]="column" (onCreateCard)="openCreateCardDialog($event)"
-    (onDrop)="drop($event)" (refreshBoard)="refetchBoard()"></app-column>
+  <app-column *ngFor="let column of columns" [column]="column" (onDrop)="drop($event)" (refreshBoard)="refetchBoard()">
+  </app-column>
 </div>

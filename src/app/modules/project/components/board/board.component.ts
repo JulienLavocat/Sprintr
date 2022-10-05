@@ -36,11 +36,7 @@ export class BoardComponent {
   getBoard$!: QueryRef<GetBoardQuery, any>;
   columns: BoardColumn[] = [];
 
-  constructor(
-    private store: Store<State>,
-    private dialog: MatDialog,
-    private getBoard: GetBoardGQL
-  ) {
+  constructor(private store: Store<State>, private getBoard: GetBoardGQL) {
     this.project$.subscribe((project) => {
       if (!project) return;
 
@@ -57,18 +53,6 @@ export class BoardComponent {
           cards: [...e.cards], // Array is non-writable, create a new one
         }));
       });
-    });
-  }
-
-  openCreateCardDialog(columnId: string) {
-    const dialogRef = this.dialog.open<CreateCardComponent, any, Card>(
-      CreateCardComponent,
-      {}
-    );
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (!result) return;
-      this.columns.find((e) => e.id === columnId)?.cards.push(result);
     });
   }
 
