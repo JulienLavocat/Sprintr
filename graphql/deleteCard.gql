@@ -1,5 +1,5 @@
-mutation deleteCard($id: String!) {
-  deleteCard(id: $id) {
+mutation deleteCard($boardId: String!, $cardId: String!) {
+  deleteCard(boardId: $boardId, cardId: $cardId) {
     id
   }
 }

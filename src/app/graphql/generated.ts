@@ -46,6 +46,7 @@ export type Mutation = {
   createProject: Project;
   deleteCard: Card;
   deleteColumn: BoardColumn;
+  moveCardToColumn: Card;
 };
 
 
@@ -73,12 +74,20 @@ export type MutationCreateProjectArgs = {
 
 
 export type MutationDeleteCardArgs = {
-  id: Scalars['String'];
+  boardId: Scalars['String'];
+  cardId: Scalars['String'];
 };
 
 
 export type MutationDeleteColumnArgs = {
   id: Scalars['String'];
+};
+
+
+export type MutationMoveCardToColumnArgs = {
+  boardId: Scalars['String'];
+  cardId: Scalars['String'];
+  destinationColumnId: Scalars['String'];
 };
 
 export type Project = {
@@ -139,7 +148,8 @@ export type CreateColumnMutationVariables = Exact<{
 export type CreateColumnMutation = { __typename?: 'Mutation', createColumn: { __typename?: 'BoardColumn', id: string } };
 
 export type DeleteCardMutationVariables = Exact<{
-  id: Scalars['String'];
+  boardId: Scalars['String'];
+  cardId: Scalars['String'];
 }>;
 
 
@@ -166,6 +176,15 @@ export type GetprojecQueryVariables = Exact<{
 
 
 export type GetprojecQuery = { __typename?: 'Query', getProject: { __typename?: 'Project', id: string, name: string } };
+
+export type MoveCardToColumnMutationVariables = Exact<{
+  boardId: Scalars['String'];
+  cardId: Scalars['String'];
+  destinationColumnId: Scalars['String'];
+}>;
+
+
+export type MoveCardToColumnMutation = { __typename?: 'Mutation', moveCardToColumn: { __typename?: 'Card', id: string } };
 
 export type SubscribeToBoardUpdatesSubscriptionVariables = Exact<{
   boardId: Scalars['String'];
@@ -219,8 +238,8 @@ export const CreateColumnDocument = gql`
     }
   }
 export const DeleteCardDocument = gql`
-    mutation deleteCard($id: String!) {
-  deleteCard(id: $id) {
+    mutation deleteCard($boardId: String!, $cardId: String!) {
+  deleteCard(boardId: $boardId, cardId: $cardId) {
     id
   }
 }
@@ -299,6 +318,28 @@ export const GetprojecDocument = gql`
   })
   export class GetprojecGQL extends Apollo.Query<GetprojecQuery, GetprojecQueryVariables> {
     document = GetprojecDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const MoveCardToColumnDocument = gql`
+    mutation moveCardToColumn($boardId: String!, $cardId: String!, $destinationColumnId: String!) {
+  moveCardToColumn(
+    boardId: $boardId
+    cardId: $cardId
+    destinationColumnId: $destinationColumnId
+  ) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class MoveCardToColumnGQL extends Apollo.Mutation<MoveCardToColumnMutation, MoveCardToColumnMutationVariables> {
+    document = MoveCardToColumnDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

@@ -1,0 +1,13 @@
+mutation moveCardToColumn(
+  $boardId: String!
+  $cardId: String!
+  $destinationColumnId: String!
+) {
+  moveCardToColumn(
+    boardId: $boardId
+    cardId: $cardId
+    destinationColumnId: $destinationColumnId
+  ) {
+    id
+  }
+}

@@ -15,6 +15,7 @@ import {
   Card,
   GetBoardGQL,
   GetBoardQuery,
+  MoveCardToColumnGQL,
   SubscribeToBoardUpdatesGQL,
 } from '../../../../graphql/generated';
 import { State } from '../../../../state';
@@ -41,7 +42,8 @@ export class BoardComponent {
   constructor(
     private store: Store<State>,
     private getBoard: GetBoardGQL,
-    private subscribeToBoardUpdates: SubscribeToBoardUpdatesGQL
+    private subscribeToBoardUpdates: SubscribeToBoardUpdatesGQL,
+    private moveCardToColumn: MoveCardToColumnGQL
   ) {
     this.project$.subscribe((project) => {
       if (!project) return;
@@ -89,13 +91,29 @@ export class BoardComponent {
       (e) => e.id === event.container.data
     )?.cards;
 
-    origin &&
-      destination &&
-      transferArrayItem(
-        origin,
-        destination,
-        event.previousIndex,
-        event.currentIndex
-      );
+    if (!origin || !destination) return;
+
+    console.log({
+      boardId: this.boardId,
+      cardId: origin[event.previousIndex].id,
+      destinationColumnId: event.container.data,
+    });
+
+    this.moveCardToColumn
+      .mutate({
+        boardId: this.boardId,
+        cardId: origin[event.previousIndex].id,
+        destinationColumnId: event.container.data,
+      })
+      .subscribe(() => {
+        // TODO: Handle this
+      });
+
+    transferArrayItem(
+      origin,
+      destination,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 }

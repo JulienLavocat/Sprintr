@@ -42,6 +42,7 @@ export const TYPE_HUMANIZED: Record<keyof typeof CARD_COLORS, string> = {
 })
 export class CardComponent implements OnInit {
   @Input() card!: Card;
+  @Input() boardId!: string;
 
   @ViewChild('cardContextMenu') contextMenu!: TemplateRef<any>;
 
@@ -118,7 +119,8 @@ export class CardComponent implements OnInit {
   onDeleteCard() {
     this.deleteCard
       .mutate({
-        id: this.card.id,
+        boardId: this.boardId,
+        cardId: this.card.id,
       })
       .subscribe(() => {
         //TODO: Handle this
