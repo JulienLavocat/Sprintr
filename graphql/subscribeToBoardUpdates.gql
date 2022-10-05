@@ -1,0 +1,14 @@
+subscription subscribeToBoardUpdates($boardId: String!) {
+  subscribeToBoardUpdates(boardId: $boardId) {
+    cards {
+      content
+      id
+      score
+      scoreType
+      title
+      type
+    }
+    id
+    name
+  }
+}

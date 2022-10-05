@@ -15,6 +15,7 @@ import {
   Card,
   GetBoardGQL,
   GetBoardQuery,
+  SubscribeToBoardUpdatesGQL,
 } from '../../../../graphql/generated';
 import { State } from '../../../../state';
 import { CreateCardComponent } from './create-card/create-card.component';
@@ -35,8 +36,13 @@ export class BoardComponent {
 
   getBoard$!: QueryRef<GetBoardQuery, any>;
   columns: BoardColumn[] = [];
+  boardId!: string;
 
-  constructor(private store: Store<State>, private getBoard: GetBoardGQL) {
+  constructor(
+    private store: Store<State>,
+    private getBoard: GetBoardGQL,
+    private subscribeToBoardUpdates: SubscribeToBoardUpdatesGQL
+  ) {
     this.project$.subscribe((project) => {
       if (!project) return;
 
@@ -47,17 +53,26 @@ export class BoardComponent {
 
       this.getBoard$.valueChanges.subscribe((result) => {
         const board = result.data.getBoard;
+        this.boardId = board.id;
         this.store.dispatch(setBoard(board));
         this.columns = board.columns.map((e) => ({
           ...e,
           cards: [...e.cards], // Array is non-writable, create a new one
         }));
+
+        this.subscribeToBoardUpdates
+          .subscribe({
+            boardId: board.id,
+          })
+          .subscribe((v) => {
+            if (!v.data) return;
+            this.columns = v.data.subscribeToBoardUpdates || [];
+          });
       });
     });
   }
 
   drop(event: CdkDragDrop<any>) {
-    // container.data contains the columns key
     if (event.previousContainer === event.container) {
       const origin = this.columns.find(
         (e) => e.id === event.container.data
@@ -82,9 +97,5 @@ export class BoardComponent {
         event.previousIndex,
         event.currentIndex
       );
-  }
-
-  refetchBoard() {
-    this.getBoard$.refetch();
   }
 }

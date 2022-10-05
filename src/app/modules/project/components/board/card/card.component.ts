@@ -41,8 +41,6 @@ export const TYPE_HUMANIZED: Record<keyof typeof CARD_COLORS, string> = {
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
-  @Output() refreshBoard = new EventEmitter<void>();
-
   @Input() card!: Card;
 
   @ViewChild('cardContextMenu') contextMenu!: TemplateRef<any>;
@@ -122,6 +120,8 @@ export class CardComponent implements OnInit {
       .mutate({
         id: this.card.id,
       })
-      .subscribe(() => this.refreshBoard.emit());
+      .subscribe(() => {
+        //TODO: Handle this
+      });
   }
 }

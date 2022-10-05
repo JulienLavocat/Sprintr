@@ -27,9 +27,9 @@ import { CreateCardComponent } from '../create-card/create-card.component';
 })
 export class ColumnComponent {
   @Output() onDrop = new EventEmitter<CdkDragDrop<any, any, any>>();
-  @Output() refreshBoard = new EventEmitter<void>();
 
   @Input() column!: BoardColumn;
+  @Input() boardId!: string;
 
   @ViewChild('columnContextMenu') contextMenu!: TemplateRef<any>;
 
@@ -109,15 +109,18 @@ export class ColumnComponent {
       this.createCard
         .mutate({
           ...result,
+          boardId: this.boardId,
           columnId: this.column.id,
         })
-        .subscribe(() => this.refreshBoard.emit());
+        .subscribe(() => {
+          // TODO: Handle this
+        });
     });
   }
 
   onDelete() {
-    this.deleteColumn
-      .mutate({ columnId: this.column.id })
-      .subscribe(() => this.refreshBoard.emit());
+    this.deleteColumn.mutate({ columnId: this.column.id }).subscribe(() => {
+      // TODO: Handle this
+    });
   }
 }

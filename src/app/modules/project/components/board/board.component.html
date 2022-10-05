@@ -1,7 +1,6 @@
-<app-board-actions *ngIf="hasActions" [addColumn]="addColumn" [beginSprint]="beginSprint" [endSprint]="endSprint"
-  (refreshBoard)="refetchBoard()">
+<app-board-actions *ngIf="hasActions" [addColumn]="addColumn" [beginSprint]="beginSprint" [endSprint]="endSprint">
 </app-board-actions>
 <div class="board" cdkDropListGroup>
-  <app-column *ngFor="let column of columns" [column]="column" (onDrop)="drop($event)" (refreshBoard)="refetchBoard()">
+  <app-column *ngFor="let column of columns" [column]="column" (onDrop)="drop($event)" [boardId]="boardId">
   </app-column>
 </div>

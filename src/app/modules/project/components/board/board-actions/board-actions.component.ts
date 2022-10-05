@@ -11,8 +11,6 @@ import { CreateColumnComponent } from './create-column/create-column.component';
   styleUrls: ['./board-actions.component.scss'],
 })
 export class BoardActionsComponent {
-  @Output() refreshBoard = new EventEmitter<void>();
-
   @Input() beginSprint: boolean = false;
   @Input() endSprint: boolean = false;
   @Input() addColumn: boolean = false;
@@ -50,9 +48,8 @@ export class BoardActionsComponent {
           projectId: this.projectId,
           name: result,
         })
-        .subscribe((result) => {
-          if (result.errors) return;
-          this.refreshBoard.emit();
+        .subscribe(() => {
+          // TODO: Handle this
         });
     });
   }

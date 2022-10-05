@@ -50,6 +50,7 @@ export type Mutation = {
 
 
 export type MutationCreateCardArgs = {
+  boardId: Scalars['String'];
   columnId: Scalars['String'];
   content: Scalars['String'];
   score: Scalars['String'];
@@ -105,7 +106,18 @@ export type QueryGetProjectArgs = {
   id: Scalars['String'];
 };
 
+export type Subscription = {
+  __typename?: 'Subscription';
+  subscribeToBoardUpdates?: Maybe<Array<BoardColumn>>;
+};
+
+
+export type SubscriptionSubscribeToBoardUpdatesArgs = {
+  boardId: Scalars['String'];
+};
+
 export type CreateCardMutationVariables = Exact<{
+  boardId: Scalars['String'];
   columnId: Scalars['String'];
   title: Scalars['String'];
   content: Scalars['String'];
@@ -155,9 +167,17 @@ export type GetprojecQueryVariables = Exact<{
 
 export type GetprojecQuery = { __typename?: 'Query', getProject: { __typename?: 'Project', id: string, name: string } };
 
+export type SubscribeToBoardUpdatesSubscriptionVariables = Exact<{
+  boardId: Scalars['String'];
+}>;
+
+
+export type SubscribeToBoardUpdatesSubscription = { __typename?: 'Subscription', subscribeToBoardUpdates?: Array<{ __typename?: 'BoardColumn', id: string, name: string, cards: Array<{ __typename?: 'Card', content: string, id: string, score: string, scoreType: string, title: string, type: string }> }> | null };
+
 export const CreateCardDocument = gql`
-    mutation createCard($columnId: String!, $title: String!, $content: String!, $type: String!, $score: String!, $scoreType: String!) {
+    mutation createCard($boardId: String!, $columnId: String!, $title: String!, $content: String!, $type: String!, $score: String!, $scoreType: String!) {
   createCard(
+    boardId: $boardId
     columnId: $columnId
     title: $title
     content: $content
@@ -279,6 +299,33 @@ export const GetprojecDocument = gql`
   })
   export class GetprojecGQL extends Apollo.Query<GetprojecQuery, GetprojecQueryVariables> {
     document = GetprojecDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const SubscribeToBoardUpdatesDocument = gql`
+    subscription subscribeToBoardUpdates($boardId: String!) {
+  subscribeToBoardUpdates(boardId: $boardId) {
+    cards {
+      content
+      id
+      score
+      scoreType
+      title
+      type
+    }
+    id
+    name
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SubscribeToBoardUpdatesGQL extends Apollo.Subscription<SubscribeToBoardUpdatesSubscription, SubscribeToBoardUpdatesSubscriptionVariables> {
+    document = SubscribeToBoardUpdatesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
