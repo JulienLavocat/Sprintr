@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Card } from '../../../../../shared/models/card.model';
+import { Card } from '../../../../../graphql/generated';
 
 @Component({
   selector: 'app-create-card',

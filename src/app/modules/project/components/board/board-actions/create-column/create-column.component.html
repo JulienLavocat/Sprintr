@@ -1,0 +1,7 @@
+<form (ngSubmit)="onSubmit()" class="create-column-form" [formGroup]="form">
+  <mat-form-field appearance="fill">
+    <mat-label>Column's name</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field>
+  <button mat-raised-button color="primary">Create column</button>
+</form>

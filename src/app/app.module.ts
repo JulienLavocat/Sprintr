@@ -10,6 +10,7 @@ import { ProjectModule } from './modules/project/project.module';
 import { projectReducer } from './features/project.feature';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import { boardReducer } from './features/board.feature';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     StoreModule.forRoot({
       project: projectReducer,
+      board: boardReducer,
     }),
     LayoutModule,
     ProjectModule,

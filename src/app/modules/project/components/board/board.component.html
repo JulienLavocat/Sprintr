@@ -1,12 +1,7 @@
+<app-board-actions *ngIf="hasActions" [addColumn]="addColumn" [beginSprint]="beginSprint" [endSprint]="endSprint"
+  (refreshBoard)="refetchBoard()">
+</app-board-actions>
 <div class="board" cdkDropListGroup>
-  <ul *ngFor="let column of columns" class="board-col" cdkDropList (cdkDropListDropped)="drop($event)"
-    [cdkDropListData]="column">
-    <div class="title">
-      <h2>{{column}}</h2>
-      <button mat-icon-button class="add-card" (click)="openCreateCardDialog(column)">
-        <mat-icon fontIcon="add"></mat-icon>
-      </button>
-    </div>
-    <app-card *ngFor="let card of (columnsContent || {})[column]" [card]="card"></app-card>
-  </ul>
+  <app-column *ngFor="let column of columns" [column]="column" (onCreateCard)="openCreateCardDialog($event)"
+    (onDrop)="drop($event)" (refreshBoard)="refetchBoard()"></app-column>
 </div>

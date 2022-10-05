@@ -1,4 +1,7 @@
 <div class="actions">
+  <button mat-raised-button color="primary" *ngIf="addColumn" (click)="onAddColumn()">
+    <mat-icon class="material-icons-outlined">post_add</mat-icon>Create list
+  </button>
   <button mat-raised-button color="primary" *ngIf="beginSprint">
     <mat-icon class="material-icons-outlined">rocket_launch</mat-icon>Begin sprint
   </button>

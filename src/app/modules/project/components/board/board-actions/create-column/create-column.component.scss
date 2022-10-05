@@ -1,0 +1,10 @@
+.create-column-form {
+  display: flex;
+  flex-direction: column;
+
+  button {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

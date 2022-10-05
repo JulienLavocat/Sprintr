@@ -1,0 +1,5 @@
+mutation CreateColumn($projectId: String!, $boardId: String!, $name: String!) {
+  createColumn(projectId: $projectId, boardId: $boardId, name: $name) {
+    id
+  }
+}

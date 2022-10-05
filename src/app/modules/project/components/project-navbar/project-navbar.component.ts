@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Project } from '../../../../shared/models/project.model';
+import { Project } from '../../../../graphql/generated';
 
 @Component({
   selector: 'app-project-navbar',

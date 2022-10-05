@@ -2,8 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { setProject } from '../../features/project.feature';
-import { GetprojecGQL } from '../../graphql/generated';
-import { Project } from '../../shared/models/project.model';
+import { GetprojecGQL, Project } from '../../graphql/generated';
 
 @Component({
   selector: 'app-project',

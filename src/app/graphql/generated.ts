@@ -41,12 +41,26 @@ export type Card = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createColumn: BoardColumn;
   createProject: Project;
+  deleteColumn: BoardColumn;
+};
+
+
+export type MutationCreateColumnArgs = {
+  boardId: Scalars['String'];
+  name: Scalars['String'];
+  projectId: Scalars['String'];
 };
 
 
 export type MutationCreateProjectArgs = {
   name: Scalars['String'];
+};
+
+
+export type MutationDeleteColumnArgs = {
+  id: Scalars['String'];
 };
 
 export type Project = {
@@ -74,6 +88,22 @@ export type QueryGetProjectArgs = {
   id: Scalars['String'];
 };
 
+export type CreateColumnMutationVariables = Exact<{
+  projectId: Scalars['String'];
+  boardId: Scalars['String'];
+  name: Scalars['String'];
+}>;
+
+
+export type CreateColumnMutation = { __typename?: 'Mutation', createColumn: { __typename?: 'BoardColumn', id: string } };
+
+export type DeleteColumnMutationVariables = Exact<{
+  columnId: Scalars['String'];
+}>;
+
+
+export type DeleteColumnMutation = { __typename?: 'Mutation', deleteColumn: { __typename?: 'BoardColumn', id: string } };
+
 export type GetBoardQueryVariables = Exact<{
   projectId: Scalars['String'];
   name: Scalars['String'];
@@ -89,6 +119,42 @@ export type GetprojecQueryVariables = Exact<{
 
 export type GetprojecQuery = { __typename?: 'Query', getProject: { __typename?: 'Project', id: string, name: string } };
 
+export const CreateColumnDocument = gql`
+    mutation CreateColumn($projectId: String!, $boardId: String!, $name: String!) {
+  createColumn(projectId: $projectId, boardId: $boardId, name: $name) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateColumnGQL extends Apollo.Mutation<CreateColumnMutation, CreateColumnMutationVariables> {
+    document = CreateColumnDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteColumnDocument = gql`
+    mutation DeleteColumn($columnId: String!) {
+  deleteColumn(id: $columnId) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteColumnGQL extends Apollo.Mutation<DeleteColumnMutation, DeleteColumnMutationVariables> {
+    document = DeleteColumnDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const GetBoardDocument = gql`
     query GetBoard($projectId: String!, $name: String!) {
   getBoard(projectId: $projectId, name: $name) {
