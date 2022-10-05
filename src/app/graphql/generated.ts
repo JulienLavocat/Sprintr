@@ -33,6 +33,7 @@ export type Card = {
   __typename?: 'Card';
   content: Scalars['String'];
   id: Scalars['String'];
+  order: Scalars['Int'];
   score: Scalars['String'];
   scoreType: Scalars['String'];
   title: Scalars['String'];
@@ -54,6 +55,7 @@ export type MutationCreateCardArgs = {
   boardId: Scalars['String'];
   columnId: Scalars['String'];
   content: Scalars['String'];
+  order: Scalars['Int'];
   score: Scalars['String'];
   scoreType: Scalars['String'];
   title: Scalars['String'];
@@ -133,6 +135,7 @@ export type CreateCardMutationVariables = Exact<{
   type: Scalars['String'];
   score: Scalars['String'];
   scoreType: Scalars['String'];
+  order: Scalars['Int'];
 }>;
 
 
@@ -168,7 +171,7 @@ export type GetBoardQueryVariables = Exact<{
 }>;
 
 
-export type GetBoardQuery = { __typename?: 'Query', getBoard: { __typename?: 'Board', id: string, name: string, columns: Array<{ __typename?: 'BoardColumn', id: string, name: string, cards: Array<{ __typename?: 'Card', id: string, content: string, score: string, title: string, type: string, scoreType: string }> }> } };
+export type GetBoardQuery = { __typename?: 'Query', getBoard: { __typename?: 'Board', id: string, name: string, columns: Array<{ __typename?: 'BoardColumn', id: string, name: string, cards: Array<{ __typename?: 'Card', id: string, content: string, score: string, title: string, type: string, scoreType: string, order: number }> }> } };
 
 export type GetprojecQueryVariables = Exact<{
   id: Scalars['String'];
@@ -191,10 +194,10 @@ export type SubscribeToBoardUpdatesSubscriptionVariables = Exact<{
 }>;
 
 
-export type SubscribeToBoardUpdatesSubscription = { __typename?: 'Subscription', subscribeToBoardUpdates?: Array<{ __typename?: 'BoardColumn', id: string, name: string, cards: Array<{ __typename?: 'Card', content: string, id: string, score: string, scoreType: string, title: string, type: string }> }> | null };
+export type SubscribeToBoardUpdatesSubscription = { __typename?: 'Subscription', subscribeToBoardUpdates?: Array<{ __typename?: 'BoardColumn', id: string, name: string, cards: Array<{ __typename?: 'Card', content: string, id: string, score: string, scoreType: string, title: string, type: string, order: number }> }> | null };
 
 export const CreateCardDocument = gql`
-    mutation createCard($boardId: String!, $columnId: String!, $title: String!, $content: String!, $type: String!, $score: String!, $scoreType: String!) {
+    mutation createCard($boardId: String!, $columnId: String!, $title: String!, $content: String!, $type: String!, $score: String!, $scoreType: String!, $order: Int!) {
   createCard(
     boardId: $boardId
     columnId: $columnId
@@ -203,6 +206,7 @@ export const CreateCardDocument = gql`
     type: $type
     score: $score
     scoreType: $scoreType
+    order: $order
   ) {
     id
   }
@@ -288,6 +292,7 @@ export const GetBoardDocument = gql`
         title
         type
         scoreType
+        order
       }
     }
   }
@@ -355,6 +360,7 @@ export const SubscribeToBoardUpdatesDocument = gql`
       scoreType
       title
       type
+      order
     }
     id
     name

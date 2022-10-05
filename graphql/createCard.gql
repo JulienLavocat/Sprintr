@@ -6,6 +6,7 @@ mutation createCard(
   $type: String!
   $score: String!
   $scoreType: String!
+  $order: Int!
 ) {
   createCard(
     boardId: $boardId
@@ -15,6 +16,7 @@ mutation createCard(
     type: $type
     score: $score
     scoreType: $scoreType
+    order: $order
   ) {
     id
   }

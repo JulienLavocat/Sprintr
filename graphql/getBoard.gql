@@ -12,6 +12,7 @@ query GetBoard($projectId: String!, $name: String!) {
         title
         type
         scoreType
+        order
       }
     }
   }

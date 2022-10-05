@@ -105,12 +105,12 @@ export class ColumnComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (!result) return;
-
       this.createCard
         .mutate({
           ...result,
           boardId: this.boardId,
           columnId: this.column.id,
+          order: this.column.cards.length || 0,
         })
         .subscribe(() => {
           // TODO: Handle this
