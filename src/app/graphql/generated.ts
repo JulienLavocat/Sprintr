@@ -48,6 +48,7 @@ export type Mutation = {
   deleteCard: Card;
   deleteColumn: BoardColumn;
   moveCardToColumn: Card;
+  setCardsOrder: Card;
 };
 
 
@@ -90,6 +91,15 @@ export type MutationMoveCardToColumnArgs = {
   boardId: Scalars['String'];
   cardId: Scalars['String'];
   destinationColumnId: Scalars['String'];
+};
+
+
+export type MutationSetCardsOrderArgs = {
+  boardId: Scalars['String'];
+  cardId: Scalars['String'];
+  columnId: Scalars['String'];
+  destinationIndex: Scalars['Int'];
+  originIndex: Scalars['Int'];
 };
 
 export type Project = {
@@ -188,6 +198,17 @@ export type MoveCardToColumnMutationVariables = Exact<{
 
 
 export type MoveCardToColumnMutation = { __typename?: 'Mutation', moveCardToColumn: { __typename?: 'Card', id: string } };
+
+export type SetCardsOrderMutationVariables = Exact<{
+  boardId: Scalars['String'];
+  columnId: Scalars['String'];
+  cardId: Scalars['String'];
+  originIndex: Scalars['Int'];
+  destinationIndex: Scalars['Int'];
+}>;
+
+
+export type SetCardsOrderMutation = { __typename?: 'Mutation', setCardsOrder: { __typename?: 'Card', id: string } };
 
 export type SubscribeToBoardUpdatesSubscriptionVariables = Exact<{
   boardId: Scalars['String'];
@@ -345,6 +366,30 @@ export const MoveCardToColumnDocument = gql`
   })
   export class MoveCardToColumnGQL extends Apollo.Mutation<MoveCardToColumnMutation, MoveCardToColumnMutationVariables> {
     document = MoveCardToColumnDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const SetCardsOrderDocument = gql`
+    mutation SetCardsOrder($boardId: String!, $columnId: String!, $cardId: String!, $originIndex: Int!, $destinationIndex: Int!) {
+  setCardsOrder(
+    boardId: $boardId
+    columnId: $columnId
+    cardId: $cardId
+    originIndex: $originIndex
+    destinationIndex: $destinationIndex
+  ) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SetCardsOrderGQL extends Apollo.Mutation<SetCardsOrderMutation, SetCardsOrderMutationVariables> {
+    document = SetCardsOrderDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

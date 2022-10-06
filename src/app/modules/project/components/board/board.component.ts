@@ -16,6 +16,7 @@ import {
   GetBoardGQL,
   GetBoardQuery,
   MoveCardToColumnGQL,
+  SetCardsOrderGQL,
   SubscribeToBoardUpdatesGQL,
 } from '../../../../graphql/generated';
 import { State } from '../../../../state';
@@ -43,7 +44,8 @@ export class BoardComponent {
     private store: Store<State>,
     private getBoard: GetBoardGQL,
     private subscribeToBoardUpdates: SubscribeToBoardUpdatesGQL,
-    private moveCardToColumn: MoveCardToColumnGQL
+    private moveCardToColumn: MoveCardToColumnGQL,
+    private setCardsOrder: SetCardsOrderGQL
   ) {
     this.project$.subscribe((project) => {
       if (!project) return;
@@ -76,14 +78,35 @@ export class BoardComponent {
 
   drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
-      const origin = this.columns.find(
-        (e) => e.id === event.container.data
-      )?.cards;
-      origin &&
-        moveItemInArray(origin, event.previousIndex, event.currentIndex);
-      return;
+      this.moveCardInColumn(event);
     }
 
+    this.transferCardToColumn(event);
+  }
+
+  moveCardInColumn(event: CdkDragDrop<any>) {
+    const origin = this.columns.find(
+      (e) => e.id === event.container.data
+    )?.cards;
+
+    if (!origin || event.previousIndex === event.currentIndex) return;
+
+    this.setCardsOrder
+      .mutate({
+        boardId: this.boardId,
+        columnId: event.container.data,
+        cardId: origin[event.previousIndex].id,
+        originIndex: event.previousIndex,
+        destinationIndex: event.currentIndex,
+      })
+      .subscribe(() => {
+        // TODO: Handle this
+      });
+
+    moveItemInArray(origin, event.previousIndex, event.currentIndex);
+  }
+
+  transferCardToColumn(event: CdkDragDrop<any>) {
     const origin = this.columns.find(
       (e) => e.id === event.previousContainer.data
     )?.cards;
@@ -92,12 +115,6 @@ export class BoardComponent {
     )?.cards;
 
     if (!origin || !destination) return;
-
-    console.log({
-      boardId: this.boardId,
-      cardId: origin[event.previousIndex].id,
-      destinationColumnId: event.container.data,
-    });
 
     this.moveCardToColumn
       .mutate({

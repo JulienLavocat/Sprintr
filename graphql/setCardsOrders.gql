@@ -1,0 +1,17 @@
+mutation SetCardsOrder(
+  $boardId: String!
+  $columnId: String!
+  $cardId: String!
+  $originIndex: Int!
+  $destinationIndex: Int!
+) {
+  setCardsOrder(
+    boardId: $boardId
+    columnId: $columnId
+    cardId: $cardId
+    originIndex: $originIndex
+    destinationIndex: $destinationIndex
+  ) {
+    id
+  }
+}
