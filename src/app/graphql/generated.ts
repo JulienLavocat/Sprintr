@@ -47,6 +47,7 @@ export type Mutation = {
   createProject: Project;
   deleteCard: Card;
   deleteColumn: BoardColumn;
+  endSprint: BoardColumn;
   moveCardToColumn: Card;
   setCardsOrder: Card;
 };
@@ -84,6 +85,11 @@ export type MutationDeleteCardArgs = {
 
 export type MutationDeleteColumnArgs = {
   id: Scalars['String'];
+};
+
+
+export type MutationEndSprintArgs = {
+  projectId: Scalars['String'];
 };
 
 
@@ -174,6 +180,13 @@ export type DeleteColumnMutationVariables = Exact<{
 
 
 export type DeleteColumnMutation = { __typename?: 'Mutation', deleteColumn: { __typename?: 'BoardColumn', id: string } };
+
+export type EndSprintMutationVariables = Exact<{
+  projectId: Scalars['String'];
+}>;
+
+
+export type EndSprintMutation = { __typename?: 'Mutation', endSprint: { __typename?: 'BoardColumn', id: string } };
 
 export type GetBoardQueryVariables = Exact<{
   projectId: Scalars['String'];
@@ -293,6 +306,24 @@ export const DeleteColumnDocument = gql`
   })
   export class DeleteColumnGQL extends Apollo.Mutation<DeleteColumnMutation, DeleteColumnMutationVariables> {
     document = DeleteColumnDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const EndSprintDocument = gql`
+    mutation EndSprint($projectId: String!) {
+  endSprint(projectId: $projectId) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class EndSprintGQL extends Apollo.Mutation<EndSprintMutation, EndSprintMutationVariables> {
+    document = EndSprintDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

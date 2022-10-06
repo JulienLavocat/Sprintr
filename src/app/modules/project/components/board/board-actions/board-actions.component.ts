@@ -15,6 +15,8 @@ export class BoardActionsComponent {
   @Input() endSprint: boolean = false;
   @Input() addColumn: boolean = false;
 
+  @Output() onEndSprint = new EventEmitter<void>();
+
   projectId!: string;
   boardId!: string;
   boardName!: string;
@@ -22,8 +24,7 @@ export class BoardActionsComponent {
   constructor(
     private store: Store<State>,
     private dialog: MatDialog,
-    private createColumn: CreateColumnGQL,
-    private getBoard: GetBoardGQL
+    private createColumn: CreateColumnGQL
   ) {
     this.store
       .select((state) => ({

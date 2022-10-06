@@ -1,11 +1,14 @@
 <div class="actions">
-  <button mat-raised-button color="primary" *ngIf="addColumn" (click)="onAddColumn()">
+  <button mat-raised-button color="primary" *ngIf="addColumn" (click)="onAddColumn()"
+    matTooltip="Add a new column to the board">
     <mat-icon class="material-icons-outlined">post_add</mat-icon>Create list
   </button>
-  <button mat-raised-button color="primary" *ngIf="beginSprint">
+  <button mat-raised-button color="primary" *ngIf="beginSprint"
+    matTooltip="Move all cards in Sprint+1 to 'Sprint' board and move all Sprint+2 cards to Sprint+1">
     <mat-icon class="material-icons-outlined">rocket_launch</mat-icon>Begin sprint
   </button>
-  <button mat-raised-button color="primary" *ngIf="endSprint">
+  <button mat-raised-button color="primary" *ngIf="endSprint" (click)="onEndSprint.emit()"
+    matTooltip="Create a new column in 'Archives' with the sprint's number and end date and move all cards in the 'Done' column to the newly created column">
     <mat-icon class="material-icons-outlined">inventory_2</mat-icon>End sprint
   </button>
 </div>

@@ -3,16 +3,12 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { QueryRef } from 'apollo-angular';
-import { Observable, of } from 'rxjs';
 import { setBoard } from '../../../../features/board.feature';
 import {
-  Board,
   BoardColumn,
-  Card,
   GetBoardGQL,
   GetBoardQuery,
   MoveCardToColumnGQL,
@@ -20,7 +16,6 @@ import {
   SubscribeToBoardUpdatesGQL,
 } from '../../../../graphql/generated';
 import { State } from '../../../../state';
-import { CreateCardComponent } from './create-card/create-card.component';
 
 @Component({
   selector: 'app-board',
@@ -29,10 +24,12 @@ import { CreateCardComponent } from './create-card/create-card.component';
 })
 export class BoardComponent {
   @Input() boardName!: string;
-  @Input() hasActions: boolean = true;
-  @Input() beginSprint: boolean = false;
-  @Input() endSprint: boolean = false;
-  @Input() addColumn: boolean = false;
+  @Input() hasActions = true;
+  @Input() beginSprint = false;
+  @Input() endSprint = false;
+  @Input() addColumn = false;
+
+  @Output() onEndSprint = new EventEmitter<void>();
 
   project$ = this.store.select((state) => state.project);
 

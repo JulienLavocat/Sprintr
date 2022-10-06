@@ -1,4 +1,5 @@
-<app-board-actions *ngIf="hasActions" [addColumn]="addColumn" [beginSprint]="beginSprint" [endSprint]="endSprint">
+<app-board-actions *ngIf="hasActions" [addColumn]="addColumn" [beginSprint]="beginSprint" [endSprint]="endSprint"
+  (onEndSprint)="onEndSprint.emit()">
 </app-board-actions>
 <div class="board" cdkDropListGroup>
   <app-column *ngFor="let column of columns" [column]="column" (onDrop)="drop($event)" [boardId]="boardId">

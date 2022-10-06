@@ -1,0 +1,5 @@
+mutation EndSprint($projectId: String!) {
+  endSprint(projectId: $projectId) {
+    id
+  }
+}

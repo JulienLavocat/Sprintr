@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -43,6 +44,7 @@ import { ColumnComponent } from './components/board/column/column.component';
     ReactiveFormsModule,
     RouterModule,
     DragDropModule,
+    MatTooltipModule,
   ],
   declarations: [
     ProjectComponent,
