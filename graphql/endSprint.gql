@@ -1,5 +1,3 @@
 mutation EndSprint($projectId: String!) {
-  endSprint(projectId: $projectId) {
-    id
-  }
+  endSprint(projectId: $projectId)
 }

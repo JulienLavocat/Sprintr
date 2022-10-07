@@ -16,6 +16,7 @@ export class BoardActionsComponent {
   @Input() addColumn: boolean = false;
 
   @Output() onEndSprint = new EventEmitter<void>();
+  @Output() onBeginSprint = new EventEmitter<void>();
 
   projectId!: string;
   boardId!: string;

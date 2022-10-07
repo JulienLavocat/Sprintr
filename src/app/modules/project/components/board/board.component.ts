@@ -30,6 +30,7 @@ export class BoardComponent {
   @Input() addColumn = false;
 
   @Output() onEndSprint = new EventEmitter<void>();
+  @Output() onBeginSprint = new EventEmitter<void>();
 
   project$ = this.store.select((state) => state.project);
 

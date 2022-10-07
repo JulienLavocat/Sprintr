@@ -3,7 +3,7 @@
     matTooltip="Add a new column to the board">
     <mat-icon class="material-icons-outlined">post_add</mat-icon>Create list
   </button>
-  <button mat-raised-button color="primary" *ngIf="beginSprint"
+  <button mat-raised-button color="primary" *ngIf="beginSprint" (click)="onBeginSprint.emit()"
     matTooltip="Move all cards in Sprint+1 to 'Sprint' board and move all Sprint+2 cards to Sprint+1">
     <mat-icon class="material-icons-outlined">rocket_launch</mat-icon>Begin sprint
   </button>

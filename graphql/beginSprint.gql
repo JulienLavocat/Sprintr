@@ -1,0 +1,3 @@
+mutation BeginSprint($projectId: String!) {
+  beginSprint(projectId: $projectId)
+}

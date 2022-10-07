@@ -42,14 +42,20 @@ export type Card = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  beginSprint: Scalars['Boolean'];
   createCard: Card;
   createColumn: BoardColumn;
   createProject: Project;
   deleteCard: Card;
   deleteColumn: BoardColumn;
-  endSprint: BoardColumn;
+  endSprint: Scalars['Boolean'];
   moveCardToColumn: Card;
   setCardsOrder: Card;
+};
+
+
+export type MutationBeginSprintArgs = {
+  projectId: Scalars['String'];
 };
 
 
@@ -143,6 +149,13 @@ export type SubscriptionSubscribeToBoardUpdatesArgs = {
   boardId: Scalars['String'];
 };
 
+export type BeginSprintMutationVariables = Exact<{
+  projectId: Scalars['String'];
+}>;
+
+
+export type BeginSprintMutation = { __typename?: 'Mutation', beginSprint: boolean };
+
 export type CreateCardMutationVariables = Exact<{
   boardId: Scalars['String'];
   columnId: Scalars['String'];
@@ -186,7 +199,7 @@ export type EndSprintMutationVariables = Exact<{
 }>;
 
 
-export type EndSprintMutation = { __typename?: 'Mutation', endSprint: { __typename?: 'BoardColumn', id: string } };
+export type EndSprintMutation = { __typename?: 'Mutation', endSprint: boolean };
 
 export type GetBoardQueryVariables = Exact<{
   projectId: Scalars['String'];
@@ -230,6 +243,22 @@ export type SubscribeToBoardUpdatesSubscriptionVariables = Exact<{
 
 export type SubscribeToBoardUpdatesSubscription = { __typename?: 'Subscription', subscribeToBoardUpdates?: Array<{ __typename?: 'BoardColumn', id: string, name: string, cards: Array<{ __typename?: 'Card', content: string, id: string, score: string, scoreType: string, title: string, type: string, order: number }> }> | null };
 
+export const BeginSprintDocument = gql`
+    mutation BeginSprint($projectId: String!) {
+  beginSprint(projectId: $projectId)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class BeginSprintGQL extends Apollo.Mutation<BeginSprintMutation, BeginSprintMutationVariables> {
+    document = BeginSprintDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const CreateCardDocument = gql`
     mutation createCard($boardId: String!, $columnId: String!, $title: String!, $content: String!, $type: String!, $score: String!, $scoreType: String!, $order: Int!) {
   createCard(
@@ -313,9 +342,7 @@ export const DeleteColumnDocument = gql`
   }
 export const EndSprintDocument = gql`
     mutation EndSprint($projectId: String!) {
-  endSprint(projectId: $projectId) {
-    id
-  }
+  endSprint(projectId: $projectId)
 }
     `;
 
