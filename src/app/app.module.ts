@@ -11,6 +11,7 @@ import { projectReducer } from './features/project.feature';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { boardReducer } from './features/board.feature';
+import { ProjectPickerModule } from './modules/project-picker/project-picker.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { boardReducer } from './features/board.feature';
     ProjectModule,
     GraphQLModule,
     HttpClientModule,
+    ProjectPickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

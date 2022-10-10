@@ -1,6 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport opened mode="side">
-    <mat-toolbar>{{project?.name}}</mat-toolbar>
+    <mat-toolbar><a mat-button href="/">
+        <h1>{{project?.name}}</h1>
+      </a></mat-toolbar>
     <mat-divider></mat-divider>
     <mat-nav-list>
       <a mat-list-item [href]="'/projects/' + project?.id + '/backlog'">Backlog</a>

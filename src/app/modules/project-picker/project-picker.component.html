@@ -1,0 +1,7 @@
+<div class="project-picker">
+  <div class="container">
+    <mat-card *ngFor="let project of projects" [routerLink]="'/projects/' + project.id">
+      <mat-card-title>{{project.name}}</mat-card-title>
+    </mat-card>
+  </div>
+</div>

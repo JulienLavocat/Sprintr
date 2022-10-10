@@ -4,6 +4,7 @@ import { SprintComponent } from './modules/project/views/sprint/sprint.component
 import { ProjectComponent } from './modules/project/project.component';
 import { BacklogComponent } from './modules/project/views/backlog/backlog.component';
 import { ArchivesComponent } from './modules/project/views/archives/archives.component';
+import { ProjectPickerComponent } from './modules/project-picker/project-picker.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
         component: ArchivesComponent,
       },
     ],
+  },
+  {
+    path: '',
+    component: ProjectPickerComponent,
   },
 ];
 

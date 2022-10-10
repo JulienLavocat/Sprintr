@@ -1,0 +1,19 @@
+.project-picker {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fafafa;
+
+  .container {
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .mat-card {
+    height: fit-content;
+    min-height: 4rem;
+    cursor: pointer;
+  }
+}

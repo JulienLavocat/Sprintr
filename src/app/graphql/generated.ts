@@ -216,6 +216,11 @@ export type GetprojecQueryVariables = Exact<{
 
 export type GetprojecQuery = { __typename?: 'Query', getProject: { __typename?: 'Project', id: string, name: string } };
 
+export type ListProjectsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ListProjectsQuery = { __typename?: 'Query', listProjects: Array<{ __typename?: 'Project', id: string, name: string }> };
+
 export type MoveCardToColumnMutationVariables = Exact<{
   boardId: Scalars['String'];
   cardId: Scalars['String'];
@@ -402,6 +407,25 @@ export const GetprojecDocument = gql`
   })
   export class GetprojecGQL extends Apollo.Query<GetprojecQuery, GetprojecQueryVariables> {
     document = GetprojecDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const ListProjectsDocument = gql`
+    query ListProjects {
+  listProjects {
+    id
+    name
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ListProjectsGQL extends Apollo.Query<ListProjectsQuery, ListProjectsQueryVariables> {
+    document = ListProjectsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
