@@ -77,6 +77,7 @@ export class BoardComponent {
   drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
       this.moveCardInColumn(event);
+      return;
     }
 
     this.transferCardToColumn(event);
