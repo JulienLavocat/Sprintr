@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ListProjectsGQL, Project } from '../../graphql/generated';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  CreateProjectGQL,
+  CreateProjectMutation,
+  ListProjectsGQL,
+  Project,
+} from '../../graphql/generated';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
 
 @Component({
   selector: 'app-project-picker',
@@ -9,9 +16,27 @@ import { ListProjectsGQL, Project } from '../../graphql/generated';
 export class ProjectPickerComponent {
   projects: Pick<Project, 'id' | 'name'>[] = [];
 
-  constructor(private listProjectsQuery: ListProjectsGQL) {
+  constructor(
+    private listProjectsQuery: ListProjectsGQL,
+    private dialog: MatDialog
+  ) {
+    this.fetchProjects();
+  }
+
+  createProject() {
+    this.dialog
+      .open(CreateProjectComponent)
+      .afterClosed()
+      .subscribe(() => {
+        this.fetchProjects();
+      });
+  }
+
+  private fetchProjects() {
     this.listProjectsQuery
-      .fetch()
-      .subscribe((res) => (this.projects = res.data.listProjects));
+      .fetch({}, { fetchPolicy: 'no-cache' })
+      .subscribe((res) => {
+        this.projects = res.data.listProjects;
+      });
   }
 }

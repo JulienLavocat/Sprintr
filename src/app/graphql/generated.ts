@@ -179,6 +179,13 @@ export type CreateColumnMutationVariables = Exact<{
 
 export type CreateColumnMutation = { __typename?: 'Mutation', createColumn: { __typename?: 'BoardColumn', id: string } };
 
+export type CreateProjectMutationVariables = Exact<{
+  name: Scalars['String'];
+}>;
+
+
+export type CreateProjectMutation = { __typename?: 'Mutation', createProject: { __typename?: 'Project', name: string } };
+
 export type DeleteCardMutationVariables = Exact<{
   boardId: Scalars['String'];
   cardId: Scalars['String'];
@@ -304,6 +311,24 @@ export const CreateColumnDocument = gql`
   })
   export class CreateColumnGQL extends Apollo.Mutation<CreateColumnMutation, CreateColumnMutationVariables> {
     document = CreateColumnDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateProjectDocument = gql`
+    mutation CreateProject($name: String!) {
+  createProject(name: $name) {
+    name
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateProjectGQL extends Apollo.Mutation<CreateProjectMutation, CreateProjectMutationVariables> {
+    document = CreateProjectDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
