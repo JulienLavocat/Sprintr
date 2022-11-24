@@ -12,6 +12,7 @@ import {
   GetBoardGQL,
   GetBoardQuery,
   MoveCardToColumnGQL,
+  Project,
   SetCardsOrderGQL,
   SubscribeToBoardUpdatesGQL,
 } from '../../../../graphql/generated';

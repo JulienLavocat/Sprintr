@@ -26,6 +26,7 @@ import { ProjectComponent } from './project.component';
 import { ArchivesComponent } from './views/archives/archives.component';
 import { BacklogComponent } from './views/backlog/backlog.component';
 import { SprintComponent } from './views/sprint/sprint.component';
+import { ProjectSelectorComponent } from './components/board/board-actions/components/project-selector/project-selector.component';
 
 @NgModule({
   imports: [
@@ -58,6 +59,7 @@ import { SprintComponent } from './views/sprint/sprint.component';
     CreateCardComponent,
     CreateColumnComponent,
     ColumnComponent,
+    ProjectSelectorComponent,
   ],
 })
 export class ProjectModule {}

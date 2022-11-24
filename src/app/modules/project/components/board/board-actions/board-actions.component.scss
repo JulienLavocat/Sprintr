@@ -8,4 +8,9 @@
   .mat-icon {
     margin-right: 0.5rem;
   }
+
+  .project-selector {
+    flex-grow: 1;
+    justify-self: self-start;
+  }
 }
