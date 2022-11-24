@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { CreateColumnGQL, GetBoardGQL } from '../../../../../graphql/generated';
+import { CreateColumnGQL } from '../../../../../graphql/generated';
 import { State } from '../../../../../state';
 import { CreateColumnComponent } from './create-column/create-column.component';
 

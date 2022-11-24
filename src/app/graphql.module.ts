@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { ApolloClientOptions, InMemoryCache, split } from '@apollo/client/core';
-import { HttpLink } from 'apollo-angular/http';
 import { WebSocketLink } from '@apollo/client/link/ws';
-import { environment } from '../environments/environment';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
+import { environment } from '../environments/environment';
 
 const httpUri = environment.apiUrl;
 const wsUri = environment.wsApiUrl;

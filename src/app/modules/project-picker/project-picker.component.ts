@@ -1,11 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  CreateProjectGQL,
-  CreateProjectMutation,
-  ListProjectsGQL,
-  Project,
-} from '../../graphql/generated';
+import { ListProjectsGQL, Project } from '../../graphql/generated';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 
 @Component({

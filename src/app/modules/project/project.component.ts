@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { setProject } from '../../features/project.feature';
-import { EndSprintGQL, GetprojecGQL, Project } from '../../graphql/generated';
+import { GetprojecGQL, Project } from '../../graphql/generated';
 
 @Component({
   selector: 'app-project',

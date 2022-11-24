@@ -1,5 +1,5 @@
 import { createAction, createReducer, on, props } from '@ngrx/store';
-import { Board, Project } from '../graphql/generated';
+import { Board } from '../graphql/generated';
 
 export const setBoard = createAction('[Board Component] Set', props<Board>());
 

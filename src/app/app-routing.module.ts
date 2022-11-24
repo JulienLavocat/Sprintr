@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SprintComponent } from './modules/project/views/sprint/sprint.component';
-import { ProjectComponent } from './modules/project/project.component';
-import { BacklogComponent } from './modules/project/views/backlog/backlog.component';
-import { ArchivesComponent } from './modules/project/views/archives/archives.component';
 import { ProjectPickerComponent } from './modules/project-picker/project-picker.component';
+import { ProjectComponent } from './modules/project/project.component';
+import { ArchivesComponent } from './modules/project/views/archives/archives.component';
+import { BacklogComponent } from './modules/project/views/backlog/backlog.component';
+import { SprintComponent } from './modules/project/views/sprint/sprint.component';
 
 const routes: Routes = [
   {
