@@ -1,13 +1,19 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport opened mode="side">
-    <mat-toolbar><a mat-button href="/">
-        <h1>{{project?.name}}</h1>
-      </a></mat-toolbar>
+    <mat-toolbar
+      ><a mat-button href="/">
+        <h1>{{ project?.name }}</h1>
+      </a></mat-toolbar
+    >
     <mat-divider></mat-divider>
-    <mat-nav-list>
-      <a mat-list-item [href]="'/projects/' + project?.id + '/backlog'">Backlog</a>
-      <a mat-list-item [href]="'/projects/' + project?.id + '/'">Sprint</a>
-      <a mat-list-item [href]="'/projects/' + project?.id + '/archives'">Archives</a>
+    <mat-nav-list class="views">
+      <a
+        mat-list-item
+        *ngFor="let link of links"
+        [ngClass]="{ active: link.active }"
+        [href]="'/projects/' + project?.id + link.link"
+        >{{ link.name }}</a
+      >
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

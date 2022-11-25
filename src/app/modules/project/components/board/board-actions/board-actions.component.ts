@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { CreateColumnGQL } from '../../../../../graphql/generated';
 import { State } from '../../../../../state';
-import { CreateColumnComponent } from './create-column/create-column.component';
+import { CreateColumnComponent } from './components/create-column/create-column.component';
 
 @Component({
   selector: 'app-board-actions',

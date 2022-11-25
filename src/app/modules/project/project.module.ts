@@ -16,7 +16,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { BoardActionsComponent } from './components/board/board-actions/board-actions.component';
-import { CreateColumnComponent } from './components/board/board-actions/create-column/create-column.component';
+import { CreateColumnComponent } from './components/board/board-actions/components/create-column/create-column.component';
 import { BoardComponent } from './components/board/board.component';
 import { CardComponent } from './components/board/card/card.component';
 import { ColumnComponent } from './components/board/column/column.component';

@@ -13,6 +13,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        redirectTo: 'sprint',
+        pathMatch: 'full',
+      },
+      {
+        path: 'sprint',
         component: SprintComponent,
       },
       {
