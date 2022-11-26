@@ -26,7 +26,9 @@ import { ProjectComponent } from './project.component';
 import { ArchivesComponent } from './views/archives/archives.component';
 import { BacklogComponent } from './views/backlog/backlog.component';
 import { SprintComponent } from './views/sprint/sprint.component';
-import { ProjectSelectorComponent } from './components/board/board-actions/components/project-selector/project-selector.component';
+import { ProjectSelectorComponent } from './components/project-navbar/components/project-selector/project-selector.component';
+import { CreateProjectComponent } from './views/create-project/create-project.component';
+import { CreateDialogComponent } from './views/create-project/components/create-dialog/create-dialog.component';
 
 @NgModule({
   imports: [
@@ -60,6 +62,8 @@ import { ProjectSelectorComponent } from './components/board/board-actions/compo
     CreateColumnComponent,
     ColumnComponent,
     ProjectSelectorComponent,
+    CreateProjectComponent,
+    CreateDialogComponent,
   ],
 })
 export class ProjectModule {}

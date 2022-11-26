@@ -1,5 +1,6 @@
 mutation CreateProject($name: String!) {
   createProject(name: $name) {
     name
+    id
   }
 }

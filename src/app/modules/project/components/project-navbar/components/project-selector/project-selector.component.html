@@ -1,0 +1,29 @@
+<div class="project-selector">
+  <mat-form-field appearance="outline" style="margin-bottom: -1.25em">
+    <mat-label>Select a project</mat-label>
+    <mat-select (selectionChange)="setProject($event)">
+      <mat-option *ngFor="let project of projects" [value]="project.id">{{
+        project.name
+      }}</mat-option>
+    </mat-select></mat-form-field
+  >
+  <div class="divider">
+    <div class="line"><mat-divider></mat-divider></div>
+    <div class="text mat-typography">Or create a new project</div>
+    <div class="line"><mat-divider></mat-divider></div>
+  </div>
+  <form [formGroup]="form" class="create-project" (ngSubmit)="createProject()">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      Create project
+    </button>
+  </form>
+</div>

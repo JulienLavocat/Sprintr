@@ -1,6 +1,8 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Project } from '../../../../graphql/generated';
+import { ProjectSelectorComponent } from './components/project-selector/project-selector.component';
 
 export interface ProjectNavbarLink {
   name: string;
@@ -18,7 +20,7 @@ export class ProjectNavbarComponent {
 
   links!: ProjectNavbarLink[];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private dialog: Dialog) {
     router.events.subscribe(() => this.setLinks());
     this.setLinks();
   }
@@ -42,5 +44,9 @@ export class ProjectNavbarComponent {
         active: currentView === 'archives',
       },
     ];
+  }
+
+  selectProject() {
+    this.dialog.open(ProjectSelectorComponent);
   }
 }

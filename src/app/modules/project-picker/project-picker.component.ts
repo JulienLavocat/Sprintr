@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ListProjectsGQL, Project } from '../../graphql/generated';
-import { CreateProjectComponent } from './components/create-project/create-project.component';
+import { Router } from '@angular/router';
+import { ListProjectsGQL } from '../../graphql/generated';
 
 @Component({
   selector: 'app-project-picker',
@@ -9,29 +8,12 @@ import { CreateProjectComponent } from './components/create-project/create-proje
   styleUrls: ['./project-picker.component.scss'],
 })
 export class ProjectPickerComponent {
-  projects: Pick<Project, 'id' | 'name'>[] = [];
-
-  constructor(
-    private listProjectsQuery: ListProjectsGQL,
-    private dialog: MatDialog
-  ) {
-    this.fetchProjects();
-  }
-
-  createProject() {
-    this.dialog
-      .open(CreateProjectComponent)
-      .afterClosed()
-      .subscribe(() => {
-        this.fetchProjects();
-      });
-  }
-
-  private fetchProjects() {
-    this.listProjectsQuery
-      .fetch({}, { fetchPolicy: 'no-cache' })
-      .subscribe((res) => {
-        this.projects = res.data.listProjects;
-      });
+  constructor(private router: Router, private listProjects: ListProjectsGQL) {
+    this.listProjects.fetch().subscribe((v) => {
+      if (v.loading) return;
+      if (!v.data.listProjects || v.data.listProjects.length === 0)
+        this.router.navigateByUrl(`/projects/create`);
+      else this.router.navigateByUrl(`/projects/${v.data.listProjects[0].id}`);
+    });
   }
 }

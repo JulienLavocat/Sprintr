@@ -184,7 +184,7 @@ export type CreateProjectMutationVariables = Exact<{
 }>;
 
 
-export type CreateProjectMutation = { __typename?: 'Mutation', createProject: { __typename?: 'Project', name: string } };
+export type CreateProjectMutation = { __typename?: 'Mutation', createProject: { __typename?: 'Project', name: string, id: string } };
 
 export type DeleteCardMutationVariables = Exact<{
   boardId: Scalars['String'];
@@ -320,6 +320,7 @@ export const CreateProjectDocument = gql`
     mutation CreateProject($name: String!) {
   createProject(name: $name) {
     name
+    id
   }
 }
     `;
